@@ -1,8 +1,17 @@
 prompt_unraveler_precmd() {
-    CURRENT_DIR="%{$fg_bold[magenta]%}%c%{$reset_color%}"
-    GIT="$(git_prompt_status)%{$reset_color%} %{$fg[cyan]%}$(git_prompt_info)%{$reset_color%}"
-    PY_ENV="%{$FG[147]%}$(condaenv_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}"
-    ARROW="%{$FG[142]%}〉%{$reset_color%}"
+    local CURRENT_DIR="%{$fg_bold[magenta]%}%c%{$reset_color%}"
+    local GIT="$(git_prompt_status)%{$reset_color%} %{$fg[cyan]%}$(git_prompt_info)%{$reset_color%}"
+    
+    local PY_ENV="%{$FG[147]%}"
+    if typeset -f condaenv_prompt_info > /dev/null; then
+        PY_ENV+="$(condaenv_prompt_info)"
+    fi
+    if typeset -f virtualenv_prompt_info > /dev/null; then
+        PY_ENV+="$(virtualenv_prompt_info)"
+    fi
+    PY_ENV+=" %{$reset_color%}"
+
+    local ARROW="%{$FG[142]%}〉%{$reset_color%}"
     
     PROMPT=''
     PROMPT+=$CURRENT_DIR
@@ -12,7 +21,7 @@ prompt_unraveler_precmd() {
 }
 
 setup_prompt() {
-  precmd_functions+=(prompt_unraveler_precmd)
+    precmd_functions+=(prompt_unraveler_precmd)
 }
 
 setup_prompt
@@ -28,7 +37,7 @@ ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[blue]%} ➦"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[magenta]%} ✂"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[grey]%} ✱"
 
-ZSH_THEME_CONDAENV_PROMPT_PREFIX="("
-ZSH_THEME_CONDAENV_PROMPT_SUFFIX=") "
-ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="("
-ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX=") "
+ZSH_THEME_CONDAENV_PREFIX="("
+ZSH_THEME_CONDAENV_SUFFIX=")"
+ZSH_THEME_VIRTUALENV_PREFIX="["
+ZSH_THEME_VIRTUALENV_SUFFIX="]"

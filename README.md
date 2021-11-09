@@ -3,24 +3,43 @@ A clean and humble zsh theme with support for condaenv, virtualenv and git with 
 
 ![Screencast](screencast.gif)
 
+## Plugin Dependencies
+
+1. git
+1. virtualenv
+1. condaenv
+
 ## Installation
 
-You can download [humbled.zsh-theme](https://github.com/saravanabalagi/zsh-theme-humbled/raw/master/humbled.zsh-theme) and place it in `$ZSH_CUSTOM/themes` (usually at `~/.oh-my-zsh/custom/themes`)
+1. Update `plugins` in `~/.zshrc`
 
-or use the following script to do the same
+    ```
+    plugins=(
+        ...
+        git
+        virtualenv
+        condaenv
+    )  
+    ```
 
-```
-mkdir temp
-git clone https://github.com/saravanabalagi/zsh-theme-humbled temp
-mv temp/humbled.zsh-theme $ZSH_CUSTOM/themes
-rm -rf temp
-```
+    Note that for [condaenv](https://github.com/saravanabalagi/zsh-plugin-condaenv), you also need to download it.
 
-Then edit your `~/.zshrc` file to include the following, replace `ZSH_THEME` value if already exists:
+    ```
+    git clone https://github.com/saravanabalagi/zsh-plugin-condaenv $ZSH_CUSTOM/plugins/condaenv
+    ```
 
-```
-ZSH_THEME="humbled"
-```
+
+1. Download humbled
+
+    ```
+    git clone https://github.com/saravanabalagi/zsh-theme-humbled $ZSH_CUSTOM/themes/humbled
+    ```
+
+1. Update `ZSH_THEME` in `~/.zshrc` file
+
+    ```
+    ZSH_THEME="humbled/humbled"
+    ```
 
 Enjoy humbled
 
