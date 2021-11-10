@@ -1,27 +1,27 @@
 prompt_unraveler_precmd() {
-    local CURRENT_DIR="%{$fg_bold[magenta]%}%c%{$reset_color%}"
-    local GIT="$(git_prompt_status)%{$reset_color%} %{$fg[cyan]%}$(git_prompt_info)%{$reset_color%}"
-    
-    local PY_ENV="%{$FG[147]%}"
-    if typeset -f condaenv_prompt_info > /dev/null; then
-        PY_ENV+="$(condaenv_prompt_info)"
-    fi
-    if typeset -f virtualenv_prompt_info > /dev/null; then
-        PY_ENV+="$(virtualenv_prompt_info)"
-    fi
-    PY_ENV+=" %{$reset_color%}"
+  local CURRENT_DIR="%{$fg_bold[magenta]%}%c%{$reset_color%}"
+  local GIT="$(git_prompt_status)%{$reset_color%} %{$fg[cyan]%}$(git_prompt_info)%{$reset_color%}"
+  
+  local PY_ENV="%{$FG[147]%}"
+  if typeset -f condaenv_prompt_info > /dev/null; then
+    PY_ENV+="$(condaenv_prompt_info)"
+  fi
+  if typeset -f virtualenv_prompt_info > /dev/null; then
+    PY_ENV+="$(virtualenv_prompt_info)"
+  fi
+  PY_ENV+=" %{$reset_color%}"
 
-    local ARROW="%{$FG[142]%}〉%{$reset_color%}"
-    
-    PROMPT=''
-    PROMPT+=$CURRENT_DIR
-    PROMPT+=$GIT
-    PROMPT+=$PY_ENV
-    PROMPT+=$ARROW
+  local ARROW="%{$FG[142]%}〉%{$reset_color%}"
+  
+  PROMPT=''
+  PROMPT+=$CURRENT_DIR
+  PROMPT+=$GIT
+  PROMPT+=$PY_ENV
+  PROMPT+=$ARROW
 }
 
 setup_prompt() {
-    precmd_functions+=(prompt_unraveler_precmd)
+  precmd_functions+=(prompt_unraveler_precmd)
 }
 
 setup_prompt
