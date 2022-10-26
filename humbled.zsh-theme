@@ -11,9 +11,16 @@ prompt_unraveler_precmd() {
   fi
   PY_ENV+=" %{$reset_color%}"
 
+  local SINGULARITY_ENV="%{$FG[148]%}"
+  if typeset -f singularityenv_prompt_info > /dev/null; then
+    SINGULARITY_ENV+="$(singularityenv_prompt_info)"
+  fi
+  SINGULARITY_ENV+=" %{$reset_color%}"
+
   local ARROW="%{$FG[142]%}〉%{$reset_color%}"
   
   PROMPT=''
+  PROMPT+=$SINGULARITY_ENV
   PROMPT+=$CURRENT_DIR
   PROMPT+=$GIT
   PROMPT+=$PY_ENV
@@ -37,6 +44,8 @@ ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[blue]%} ➦"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[magenta]%} ✂"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[grey]%} ✱"
 
+ZSH_THEME_SINGULARITYENV_PREFIX="|"
+ZSH_THEME_SINGULARITYENV_SUFFIX="|"
 ZSH_THEME_CONDAENV_PREFIX="("
 ZSH_THEME_CONDAENV_SUFFIX=")"
 ZSH_THEME_VIRTUALENV_PREFIX="["
